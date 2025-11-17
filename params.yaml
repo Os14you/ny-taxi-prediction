@@ -1,16 +1,51 @@
 data:
   raw_path: "data/raw/train.csv"
+  processed_dir: "data/processed"
+  taxi_zones_url: "https://d37ci6vzurychx.cloudfront.net/misc/taxi_zones.zip"
   test_size: 0.2
 
+cleaning:
+  passenger_outliers: [0, 7, 8, 9]
+  trip_duration_log_min: 4
+  trip_duration_log_max: 8
+  anomaly_threshold: 1.5
+
 features:
-  numerical:
-    - "trip_distance"
-    - "passenger_count"
-    - "pickup_hour_of_day"
-    - "pickup_day_of_year"
-  categorical:
-    - "is_anomaly"
-    - "pickup_day_of_week"
-    - "traffic_congestion"
-    - "pickup_near_airport"
-    - "dropoff_near_airport"
+  airport_radius: 1.5
+  airports: 
+    JFK: [40.6437, -73.7838]
+    LGA: [40.7732, -73.8821]
+    EWR: [40.6935, -74.1883]
+
+preprocessing:
+  test_size: 0.2
+  random_state: 14
+  numerical_cols:
+    - 'trip_distance'
+    - 'passenger_count'
+    - 'pickup_hour_of_day'
+    - 'pickup_day_of_year'
+  categorical_cols:
+    - 'pickup_day_of_week'
+    - 'pickup_near_airport'
+    - 'dropoff_near_airport'
+
+modeling:
+  target: 'trip_duration'
+  selected_features:
+    - 'trip_distance'
+    - 'pickup_on_Thursday'
+    - 'pickup_on_Wednesday'
+    - 'pickup_on_Monday'
+    - 'pickup_on_Sunday'
+    - 'pickup_on_Saturday'
+    - 'dropoff_near_airport_True'
+    - 'pickup_near_airport_True'
+    - 'pickup_hour_of_day'
+
+# Decision Tree Params
+model_params:
+    max_depth: 10
+    max_features: 1.0
+    min_samples_leaf: 6
+    random_state: 42
