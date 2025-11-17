@@ -19,7 +19,7 @@ def clean_data(df: pd.DataFrame, params: dict) -> pd.DataFrame:
     max_dur = params['cleaning']['trip_duration_log_max']
 
     filter_normd = (df['trip_duration'] >= min_dur) & (df['trip_duration'] <= max_dur)
-    df['trip_duration'] = df[filter_normd]
+    df = df[filter_normd]
 
     return df
 
