@@ -39,8 +39,8 @@ modeling:
     - 'pickup_on_Monday'
     - 'pickup_on_Sunday'
     - 'pickup_on_Saturday'
-    - 'dropoff_near_airport_True'
-    - 'pickup_near_airport_True'
+    - 'dropoff_near_airport_1'
+    - 'pickup_near_airport_1'
     - 'pickup_hour_of_day'
 
 # Decision Tree Params
