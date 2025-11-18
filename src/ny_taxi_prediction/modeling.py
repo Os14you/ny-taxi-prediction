@@ -21,13 +21,13 @@ def split_data(df: pd.DataFrame, params: dict) -> Tuple[pd.DataFrame, pd.DataFra
 
     return X_train, X_test, y_train, y_test
 
-def preprocess_features(X_train: pd.DataFrame, X_test: pd.DataFrame, params: dict) -> Tuple[pd.DataFrame, pd.DataFrame]:
+def preprocess_features(X_train: pd.DataFrame, X_test: pd.DataFrame, params: dict) -> Tuple[pd.DataFrame, pd.DataFrame, ColumnTransformer]:
     """
     Applies StandardScaler and OneHotEncoding to features.
     Renames columns to match the notebook's naming convention (e.g., 'pickup_on_Monday').
     Filters columns to keep only the 'selected_features' defined in params.
     """
-    
+
     numerical_cols = params['preprocessing']['numerical_cols']
     categorical_cols = params['preprocessing']['categorical_cols']
     selected_features = params['modeling']['selected_features']
@@ -59,7 +59,7 @@ def preprocess_features(X_train: pd.DataFrame, X_test: pd.DataFrame, params: dic
     X_test_processed = X_test_processed.rename(columns=day_mapping)
 
     final_cols = [c for c in selected_features if c in X_train_processed.columns]
-    return X_train_processed[final_cols], X_test_processed[final_cols]
+    return X_train_processed[final_cols], X_test_processed[final_cols], preprocessor
 
 def train_model(X_train: pd.DataFrame, y_train: pd.Series, params: dict) -> DecisionTreeRegressor:
     """Trains a Decision Tree Regressor using parameters from params.yaml."""
