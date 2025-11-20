@@ -1,7 +1,7 @@
 [project]
 name = "ny-taxi-prediction"
 version = "0.1.0"
-description = "Add your description here"
+description = "An end-to-end machine learning pipeline for predicting NYC taxi trip durations using geospatial feature engineering and decision tree regression."
 readme = "README.md"
 authors = [
     { name = "Osama", email = "osama.yousef@tuta.io" }
